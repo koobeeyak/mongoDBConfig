@@ -9,7 +9,7 @@ import (
 )
 
 // Load MongoDB host, user, pass etc. so we can connect
-func (db *DBInfo) LoadFromConfigFile(configFile string) error {
+func (db *DBInfo) loadFromConfigFile(configFile string) error {
 	content, err := ioutil.ReadFile(configFile)
 	if err != nil {
 		log.Fatalf("Couldn't read config file: %v", err)
@@ -32,7 +32,7 @@ func (db *DBInfo) LoadFromConfigFile(configFile string) error {
 // Then need to select specific collection
 func NewDBConn() *mgo.Database {
 	db := DBInfo{}
-	err := db.LoadFromConfigFile(MONGO_CONFIG_FILE)
+	err := db.loadFromConfigFile(MONGO_CONFIG_FILE)
 	if err != nil {
 		panic(err)
 	}
